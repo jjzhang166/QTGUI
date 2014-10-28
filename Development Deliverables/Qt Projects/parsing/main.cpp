@@ -7,6 +7,7 @@
 #include <QtWidgets/QLineEdit>
 #include <iostream>
 #include <QDebug>
+#include <map>
 
 /*void addPersonsToUI(QList< QMap<QString,QString> >& persons) {
     while(!persons.isEmpty()) {
@@ -111,11 +112,17 @@ void parseXML() {
     while(!xml.atEnd() && !xml.hasError()) {
 
         QXmlStreamReader::TokenType token = xml.readNext();     // Read next element
-        //qDebug() << "   " << xml.qualifiedName() << "    " << xml.tokenString();
+
+        std::map<QStringRef, QStringRef> m;
 
         if (xml.qualifiedName() == "widget" && xml.isEndElement() != true)
         {
-            qDebug() << xml.attributes().at(0).value();
+            // Store values into the dictionary
+            m[xml.attributes().at(0).value()] = xml.attributes().at(1).value();
+
+            // Print values to the console
+            qDebug() << xml.attributes().at(0).value();     // Class type
+            qDebug() << xml.attributes().at(1).value();     // Class name
         }
 
         if(token == QXmlStreamReader::StartDocument) {      //If token is just StartDocument, we'll go to next
