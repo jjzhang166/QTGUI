@@ -8,6 +8,9 @@
 #include <iostream>
 #include <QDebug>
 #include <map>
+#include <QTextStream>
+
+std::map<std::pair<QStringRef, QStringRef>, QString> m;
 
 void parseXML() {
     /* We'll parse the example.xml */
@@ -24,14 +27,11 @@ void parseXML() {
 
     /* QXmlStreamReader takes any QIODevice. */
     QXmlStreamReader xml(file);
-    QList< QMap<QString,QString> > persons;
 
     /* We'll parse the XML until we reach end of it.*/
     while(!xml.atEnd() && !xml.hasError()) {
 
         QXmlStreamReader::TokenType token = xml.readNext();     // Read next element
-
-        std::map<std::pair<QStringRef, QStringRef>, QString> m;
 
         if(token == QXmlStreamReader::StartDocument) {      //If token is just StartDocument, we'll go to next
             continue;
@@ -59,7 +59,32 @@ void parseXML() {
     file->close();
 }
 
+void generateParameters()
+{
+    QFile data("C:\\Users\\galagali\\Desktop\\Navaneet's Folder\\College stuff\\Senior year\\Software Engineering\\Qt Projects\\parsing\\parameters.cpp");
+    if (data.open(QFile::WriteOnly | QFile::Truncate)) {
+         QDebug out(&data);
+         out << "#include <QString>\n"
+
+         typedef std::map<std::pair<QStringRef, QStringRef>, QString> Dict;
+         typedef Dict::const_iterator It;
+
+         for (It it= m.begin(); it != m.end(); ++it)
+         {
+             out << "\nvoid set" << it->first.first << it->first.second << "(QString toSet)";
+             out << "\n{\n\n}";
+             out << "\nvoid get" << it->first.first << it->first.second << "()";
+             out << "\n{\n" << "\treturn m[std::make_pair(" << it->first.first << ", " << it->first.second << ")];\n}";
+             //std::cout <<it->second <<' '
+             //            <<d[std::make_pair(j, i)] <<'\n';
+         }
+     }
+
+    data.close();
+}
+
 int main(int argc, char *argv[])
 {
     parseXML();
+    generateParameters();
 }
