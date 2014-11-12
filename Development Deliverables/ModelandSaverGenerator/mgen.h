@@ -3,8 +3,10 @@
 
 //define file name is not already done
 #ifndef MODELFILENAME
-#define MODELFILENAME "../COMP523ProjectQTParamCp/Model.cpp"
+#define MODELFILENAME "../COMP523ProjectQTParamCp/Model.h"
 #endif
+
+
 
 //Define the header of the class
 #define CLASSHEADER \
@@ -29,6 +31,7 @@
 
 #include <iostream>
 #include <QDebug>
+#include <QTextEdit>
 
 
 
@@ -40,7 +43,8 @@ using namespace std;
 template <class K, class V>
 class MGen{
     const map<K,V> & hmap;
-    std::ofstream filestream;
+    //file stream to print out to model file
+    std::ofstream modelstream;
     //headers that have been used
     std::set<QString> usedHeader;
 
@@ -62,42 +66,42 @@ public:
 
     //Outputs the hmap into the Model.cpp
     void generateClass() {
-        filestream.open(MODELFILENAME,ios::out);
+        modelstream.open(MODELFILENAME,ios::out);
         try{
-            if(filestream.is_open()) {
+            if(modelstream.is_open()) {
 
                 //generate the includes
-                genIncludes(filestream);
+                genIncludes(modelstream);
 
                 //print class keyword and the class name
-                filestream << CLASSHEADER<<endl;
+                modelstream << CLASSHEADER<<endl;
 
 
 
                 //generate the field
-                genField(filestream);
+                genField(modelstream);
 
 
 
                 //make getter and setters public
-                filestream <<endl<< "public: "<<endl<<endl;
+                modelstream <<endl<< "public: "<<endl<<endl;
 
-                genGetSet(filestream);
+                genGetSet(modelstream);
 
 
-                filestream<<"}"<<endl;
+                modelstream<<"};"<<endl;
             }
         }catch(...) {
             cout<<"Output to model cpp file failed"<<endl;
 
         }
 
-        filestream.close();
+        modelstream.close();
     }
 
 
 private:
-    void genIncludes(ofstream & filestream) {
+    void genIncludes(ofstream & modelstream) {
         //get iterator from begin
         map<K,V>::const_iterator it=hmap.begin();
 
@@ -112,7 +116,7 @@ private:
                     //try to find the header first
                     (usedHeader.find(it->second.toUtf8().constData()) == usedHeader.end())) {
 
-                filestream<<"#include <"<<it->second.toUtf8().constData()
+                modelstream<<"#include <"<<it->second.toUtf8().constData()
                          <<">"<<endl<<endl;
 
                 //put into set
@@ -126,14 +130,14 @@ private:
 
 
     //generates fields
-    void genField(ofstream & filestream){
+    void genField(ofstream & modelstream){
         //get iterator from begin
         map<K,V>::const_iterator it=hmap.begin();
 
 
         while(it != hmap.end()) {
 
-            filestream<<"\t"<<it->second.toUtf8().constData()<<" "
+            modelstream<<"\t"<<it->second.toUtf8().constData()<<" "
                      <<it->first.second.toUtf8().constData()<<";"<<endl;
 
 
@@ -145,7 +149,7 @@ private:
     }
 
 
-    void genGetSet(ofstream & filestream) {
+    void genGetSet(ofstream & modelstream) {
         //get iterator from begin
         map<K,V>::const_iterator it=hmap.begin();
 
@@ -153,36 +157,36 @@ private:
         while(it != hmap.end()) {
 
             //getter
-            genGet(it,filestream);
+            genGet(it,modelstream);
 
 
 
             //setter
-            genSet(it,filestream);
+            genSet(it,modelstream);
 
             it++;
         }
 
     }
 
-    void genGet(typename map<K,V>::const_iterator & it, ofstream & filestream) {
+    void genGet(typename map<K,V>::const_iterator & it, ofstream & modelstream) {
         //generate Type getVarName();
-        filestream<<"\t"<<it->second.toUtf8().constData()<<" "
+        modelstream<<"\t"<<it->second.toUtf8().constData()<<" "
                  <<"get"
                 <<it->first.second.toUtf8().constData()<<"(){"<<endl;
 
         //generate body of getter
-        filestream<<"\t\treturn "<<
+        modelstream<<"\t\treturn "<<
                     it->first.second.toUtf8().constData()<<";"<<endl;
 
         //end it
-        filestream<<"\t}"<<endl;
+        modelstream<<"\t}"<<endl;
 
     }
 
-    void genSet(typename map<K,V>::const_iterator & it, ofstream & filestream) {
+    void genSet(typename map<K,V>::const_iterator & it, ofstream & modelstream) {
         //generate Type setVarName(Type a);
-        filestream<<"\tvoid "
+        modelstream<<"\tvoid "
                  <<"set"
                 <<it->first.second.toUtf8().constData()<<"("
                <<it->second.toUtf8().constData()
@@ -190,14 +194,16 @@ private:
              <<"){"<<endl;
 
         //generate body of setter
-        filestream<<"\t\t"<<
+        modelstream<<"\t\t"<<
                     it->first.second.toUtf8().constData()<<"=a;"
                  <<endl;
 
         //end it
-        filestream<<"\t}"<<endl;
+        modelstream<<"\t}"<<endl;
 
     }
+
+
 
 };
 
