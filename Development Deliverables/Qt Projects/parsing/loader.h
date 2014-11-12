@@ -45,15 +45,8 @@ public:
 		{
 			if((it -> first.second).compare(tmpClassName) == 0) 
 			{
-				if(tmpClassType.compare("QString") == 0) 
-				{
-    //				model.setcheckBox((QString)(it -> second));
-				}
-				else if(tmpClassType.compare("QCheckBox") == 0) 
-				{
 					int boolValue = ((QString)(it -> second)).toInt();
 					model.setcheckBox(static_cast<bool>(boolValue));
-				}
 			}
 		}
 
@@ -64,15 +57,7 @@ public:
 		{
 			if((it -> first.second).compare(tmpClassName) == 0) 
 			{
-				if(tmpClassType.compare("QString") == 0) 
-				{
 					model.settextEdit((QString)(it -> second));
-				}
-				else if(tmpClassType.compare("QCheckBox") == 0) 
-				{
-					int boolValue = ((QString)(it -> second)).toInt();
-    //				model.settextEdit(static_cast<bool>(boolValue));
-				}
 			}
 		}
 
