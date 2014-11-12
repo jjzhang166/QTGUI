@@ -11,6 +11,8 @@
 #include <QDebug>
 #include <map>
 #include <QTextStream>
+#include "parameters.h"
+#include "loader.h"
 
 std::map<std::pair<QString, QString>, QString> m;
 typedef std::map<std::pair<QString, QString>, QString> Dict;
@@ -67,7 +69,7 @@ void generateParameters()
 {
   //  filebuf fb;
  //   fb.open ("C:\\Users\\galagali\\Desktop\\Navaneet's Folder\\College stuff\\Senior year\\Software Engineering\\Qt Projects\\parsing\\parameters.cpp",ios::out);
-    QFile data("C:\\Users\\galagali\\Desktop\\Navaneet's Folder\\College stuff\\Senior year\\Software Engineering\\Qt Projects\\parsing\\parameters.cpp");
+    QFile data("C:\\Users\\galagali\\Desktop\\Navaneet's Folder\\College stuff\\Senior year\\Software Engineering\\Qt Projects\\parsing\\parameters.h");
     if (data.open(QFile::WriteOnly | QFile::Truncate)) {
          QDebug out(&data);
 
@@ -76,23 +78,19 @@ void generateParameters()
 
          out.nospace() << "#include <QCoreApplication>\n#include <QString>\n";
 
-        /* for (It it= m.begin(); it != m.end(); ++it)
-         {
-            out.nospace() << "#include <" << (it -> first.first).toUtf8().constData() << ">\n";
-         }*/
-
-         out << "\n";
+         out << "\n" << "class parameters\n{\n\n";
+         out.nospace() << "public:\n\n";
 
          for (It it= m.begin(); it != m.end(); ++it)
          {
              if ((it -> first.first).compare("QTextEdit") == 0)
              {
-                 out.nospace() << "QString " << (it-> first.second).toUtf8().constData() << ";\n";
+                 out.nospace() << "\tQString " << (it-> first.second).toUtf8().constData() << ";\n";
              }
 
              else if ((it -> first.first).compare("QCheckBox") == 0)
              {
-                 out.nospace() << "bool " << (it-> first.second).toUtf8().constData() << ";\n";
+                 out.nospace() << "\tbool " << (it-> first.second).toUtf8().constData() << ";\n";
              }
          }
 
@@ -101,14 +99,20 @@ void generateParameters()
             // QByteArray className = it -> first.first;
              if ((it -> first.first).compare("QTextEdit") == 0)
              {
-                out.nospace() << "\nvoid set" << (it->first.second).toUtf8().constData() << "(QString toSet)";
-                out.nospace() << "\n{\n" << "\t" << (it -> first.second).toUtf8().constData() << " = " << "toSet" << ";\n}";
+                out.nospace() << "\n\tvoid set" << (it->first.second).toUtf8().constData() << "(QString toSet)";
+                out.nospace() << "\n\t{\n" << "\t\t" << (it -> first.second).toUtf8().constData() << " = " << "toSet" << ";\n\t}\n";
+
+                out.nospace() << "\n\t" << "QString get" << (it->first.second).toUtf8().constData() << "()";
+                out.nospace() << "\n\t{\n" << "\t\treturn " << (it -> first.second).toUtf8().constData() << ";\n\t}\n";
              }
 
              else if ((it -> first.first).compare("QCheckBox") == 0)
              {
-                 out.nospace() << "\nvoid set" << (it->first.second).toUtf8().constData() << "(bool toSet)";
-                 out.nospace() << "\n{\n" << "\t" << (it -> first.second).toUtf8().constData() << " = " << "toSet" << ";\n}";
+                 out.nospace() << "\n\tvoid set" << (it->first.second).toUtf8().constData() << "(bool toSet)";
+                 out.nospace() << "\n\t{\n" << "\t\t" << (it -> first.second).toUtf8().constData() << " = " << "toSet" << ";\n\t}\n";
+
+                 out.nospace() << "\n\t" << "bool get" << (it->first.second).toUtf8().constData() << "()";
+                 out.nospace() << "\n\t{\n" << "\t\treturn " << (it -> first.second).toUtf8().constData() << ";\n\t}\n";
              }
 
              else
@@ -116,9 +120,9 @@ void generateParameters()
                  continue;
              }
 
-             out.nospace() << "\nvoid get" << (it->first.second).toUtf8().constData() << "()";
-             out.nospace() << "\n{\n" << "\treturn " << (it -> first.second).toUtf8().constData() << ";\n}";
          }
+
+         out << "\n};";
      }
 
     data.close();
@@ -126,61 +130,82 @@ void generateParameters()
 
 void generateLoader()
 {
-    QFile loader("C:\\Users\\galagali\\Desktop\\Navaneet's Folder\\College stuff\\Senior year\\Software Engineering\\Qt Projects\\parsing\\loader.cpp");
+    QFile loader("C:\\\\Users\\\\galagali\\\\Desktop\\\\Navaneet's Folder\\\\College stuff\\\\Senior year\\\\Software Engineering\\\\Qt Projects\\\\parsing\\\\loader.h");
     if (loader.open(QFile::WriteOnly | QFile::Truncate)) {
          QDebug out(&loader);
 
-         out.nospace() << "QString tmpClassName;\n";
-         out.nospace() << "QString tmpClassType;\n";
+         out.nospace() << "#include <QCoreApplication>\n#include <QString>\n";
+         out.nospace() << "#include <QDebug>\n#include <map>\n#include <QFile>\n\n";
 
-         out.nospace() << "\nvoid loadXML(parameters model)\n{\n";
+         out.nospace() << "class loader\n{\n\n";
+         out.nospace() << "public:\n\n";
+         out.nospace() << "\tQString tmpClassName;\n";
+         out.nospace() << "\tQString tmpClassType;\n";
 
-         out.nospace() << "\tstd::map<<QString, QString>, QString> xmlTokens;\n";
-         out.nospace() << "\ttypedef std::map<std::pair<QString, QString>, QString> Dict;\n";
-         out.nospace() << "\ttypedef Dict::const_iterator It;\n\n";
+         out.nospace() << "\n\tparameters loadXML(parameters model)\n\t{\n";
+
+         out.nospace() << "\t\tstd::map<std::pair<QString, QString>, QString> xmlTokens;\n";
+         out.nospace() << "\t\ttypedef std::map<std::pair<QString, QString>, QString> Dict;\n";
+         out.nospace() << "\t\ttypedef Dict::const_iterator It;\n\n";
 
 
 
-         out.nospace() << "\tQFile* data = new QFile(\"C:\\Users\\galagali\\Desktop\\Navaneet's Folder\\College stuff\\Senior year\\Software Engineering\\Qt Projects\\parsing\\data.xml\");\n";
-         out.nospace() << "\tif (!data->open(QIODevice::ReadOnly | QIODevice::Text)) \n\t{\n";
-         out.nospace() << "\t\tqDebug() << \"Not read only\";\n";
-         out.nospace() << "\t}\n\n";
-         out.nospace() << "\tQXmlStreamReader readXML(data);\n";
-         out.nospace() << "\twhile(!readXML.atEnd() && !readXML.hasError()) \n\t{\n";
-         out.nospace() << "\t\tQXmlStreamReader::TokenType token = readXML.readNext();\n";
-         out.nospace() << "\t\tif(token == QXmlStreamReader::StartDocument) \n\t\t{\n";
-         out.nospace() << "\t\t\tcontinue;\n";
-         out.nospace() << "\t\t}\n";
-         out.nospace() << "\t\telse if (readXML.isEndElement() != true) \n\t\t{\n";
+         out.nospace() << "\t\tQFile* data = new QFile(\"C:\\\\Users\\\\galagali\\\\Desktop\\\\Navaneet's Folder\\\\College stuff\\\\Senior year\\\\Software Engineering\\\\Qt Projects\\\\parsing\\\\data.xml\");\n";
+         out.nospace() << "\t\tif (!data->open(QIODevice::ReadOnly | QIODevice::Text)) \n\t\t{\n";
+         out.nospace() << "\t\t\tqDebug() << \"Not read only\";\n";
+         out.nospace() << "\t\t}\n\n";
+         out.nospace() << "\t\tQXmlStreamReader readXML(data);\n";
+         out.nospace() << "\t\twhile(!readXML.atEnd() && !readXML.hasError()) \n\t\t{\n";
+         out.nospace() << "\t\t\tQXmlStreamReader::TokenType token = readXML.readNext();\n";
+         out.nospace() << "\t\t\tif(token == QXmlStreamReader::StartDocument) \n\t\t\t{\n";
+         out.nospace() << "\t\t\t\tcontinue;\n";
+         out.nospace() << "\t\t\t}\n";
+         out.nospace() << "\t\t\telse if (readXML.isEndElement() != true) \n\t\t\t{\n";
 
-         out.nospace() << "\t\t\txmlTokens[std::make_pair(readXML.attributes()[0].value(), readXML.attributes()[1].value())] = readXML.attributes()[2].value();\n";
-         out.nospace() << "\t\t}\n";
-         out.nospace() << "\t}\n\n";
+         out.nospace() << "\t\t\t\txmlTokens[std::make_pair(readXML.attributes()[0].value().toString(), readXML.attributes()[1].value().toString())] = readXML.attributes()[2].value().toString();\n";
+         out.nospace() << "\t\t\t}\n";
+         out.nospace() << "\t\t}\n\n";
 
          for (It it= m.begin(); it != m.end(); ++it)
          {
+            if ((it -> first.first).compare("QTextEdit") == 0)
+            {
+                out.nospace() << "\t\ttmpClassType = " << QString::fromStdString("QString") << ";\n";
+            }
 
-            out.nospace() << "\ttmpClassType = " << (it -> first.first).toUtf8().constData() << ";\n";
-            out.nospace() << "\ttmpClassName = " << (it -> first.second).toUtf8().constData() << ";\n\n";
+            else if ((it -> first.first).compare("QCheckBox") == 0)
+            {
+                out.nospace() << "\t\ttmpClassType = " << QString::fromStdString("bool") << ";\n";
+            }
 
-            out.nospace() << "\tfor (It it= xmlTokens.begin(); it != xmlTokens.end(); ++it) \n\t{\n";
+            else
+            {
+                continue;
+            }
 
-            out.nospace() << "\t\tif((it -> first.second).compare(tmpClassName) == 0) \n\t\t{\n";
+            out.nospace() << "\t\ttmpClassName = " << it -> first.second << ";\n\n";
 
-            out.nospace() << "\t\t\tif((it -> first.first).compare(\"QString\") == 0) \n\t\t\t{\n";
-            out.nospace() << "\t\t\t\tmodel.set" << (it -> first.second).toUtf8().constData();
+            out.nospace() << "\t\tfor (It it= xmlTokens.begin(); it != xmlTokens.end(); ++it) \n\t\t{\n";
+
+            out.nospace() << "\t\t\tif((it -> first.second).compare(tmpClassName) == 0) \n\t\t\t{\n";
+
+            out.nospace() << "\t\t\t\tif(tmpClassType.compare(\"QString\") == 0) \n\t\t\t\t{\n";
+            out.nospace() << "\t\t\t\t\tmodel.set" << (it -> first.second).toUtf8().constData();
             out.nospace() << "((QString)(it -> second));\n";
-            out.nospace() << "\t\t\t}\n";
+            out.nospace() << "\t\t\t\t}\n";
 
-            out.nospace() << "\t\t\telse if((it -> first.first).compare(\"QCheckBox\") == 0) \n\t\t\t{\n";
-            out.nospace() << "\t\t\t\tmodel.set" << (it -> first.second).toUtf8().constData();
-            out.nospace() << "(static_cast<bool>(it -> second));\n";
-            out.nospace() << "\t\t\t}\n";
-            out.nospace() << "\t\t}\n\t}";
+            out.nospace() << "\t\t\t\telse if(tmpClassType.compare(\"QCheckBox\") == 0) \n\t\t\t\t{\n";
+            out.nospace() << "\t\t\t\t\tint boolValue = ((QString)(it -> second)).toInt();\n";
+            out.nospace() << "\t\t\t\t\tmodel.set" << (it -> first.second).toUtf8().constData();
+            out.nospace() << "(static_cast<bool>(boolValue));\n";
+            out.nospace() << "\t\t\t\t}\n";
+            out.nospace() << "\t\t\t}\n\t\t}";
             out.nospace() << "\n\n";
          }
 
-         out.nospace() << "\n}";
+         out.nospace() << "\t\treturn model;";
+         out.nospace() << "\n\t}";
+         out.nospace() << "\n};";
     }
 
     loader.close();
@@ -224,7 +249,12 @@ void generateLoader()
 
 int main()
 {
-    parseXML();
-    generateParameters();
-    generateLoader();
+//   parseXML();
+//   generateParameters();
+//   generateLoader();
+
+   parameters b;
+   loader a;
+   b = a.loadXML(b);
+   qDebug() << b.gettextEdit() << "  " << b.getcheckBox();
 }
