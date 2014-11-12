@@ -2,6 +2,9 @@
 #include "ui_mainwindow.h"
 
 #include "model.h"
+#include <QDebug>
+#include "saver.h"
+#include "loader.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -31,6 +34,7 @@ Model MainWindow::getModel(){
 // - Updates the model with data from GUI
 void MainWindow::on_pushButton_clicked()
 {
+
     bool sb1 = ui->swagbox->isChecked();
     model.setswagbox(sb1);
 
@@ -41,13 +45,19 @@ void MainWindow::on_pushButton_clicked()
     model.settextEdit(txt1);
 
     QString txt2 = ui->textEdit_2->toPlainText();
-    model.settextEdit_2();
+    model.settextEdit_2(txt2);
+
+    Saver saver;
+    saver.save(model);
 }
 
 // Load Listener
 // - Updates the GUI with data from the model
 void MainWindow::on_pushButton_2_clicked()
 {
+    Loader loader;
+    loader.load(model);
+
     bool sb1 = model.getswagbox();
     ui->swagbox->setChecked(sb1);
 

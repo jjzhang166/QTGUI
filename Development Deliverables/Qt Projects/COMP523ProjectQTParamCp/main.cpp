@@ -1,19 +1,19 @@
-//#include "mainwindow.h"
+#include "mainwindow.h"
 #include <QApplication>
 #include <QString>
 #include <QObject>
 #include <map>
-//#include "mgen.h"
+#include "mgen.h"
 #include "model.h"
 #include <QXmlStreamWriter>
 #include <QFile>
 #include <QFileDevice>
 #include <QDebug>
-//#include "sgen.h"
-//#include "saver.h"
-//#include "loader.h"
-//#include "lgen.h"
-//#include "parse.h"
+#include "sgen.h"
+#include "saver.h"
+#include "loader.h"
+#include "lgen.h"
+#include "parse.h"
 
 #include <QTextEdit>
 #include <QLineEdit>
@@ -30,42 +30,42 @@ typedef std::pair<QString,QString> datapair;
 
 
 //    //UNCOMMENT THIS PART TO ADD MORE FIELD AND GENERATE THE MODEL.h
-//    Parser parser;
-//    map<std::pair<QString,QString>,QString> m;
+////    Parser parser;
+////    map<std::pair<QString,QString>,QString> m;
 
-//    parser.parseXML(m);
-
-
-//    MGen<std::pair<QString,QString>,QString> mgen(m);
-//    mgen.generateClass();
-
-//    SGen<std::pair<QString,QString>,QString> save(m);
-//    save.generateClass();
-
-//    LGen<std::pair<QString,QString>,QString> load(m);
-//    load.generateClass();
+////    parser.parseXML(m);
 
 
-    //GENERATE AND INSERT DATA INTO DATA.xml, which is the xml generated form the input model
+////    MGen<std::pair<QString,QString>,QString> mgen(m);
+////    mgen.generateClass();
 
-    //instantiate the saver and model
-    //    Saver saver;
-    //    Loader loader;
-    //    Model m;
+////    SGen<std::pair<QString,QString>,QString> save(m);
+////    save.generateClass();
 
-    //    //put in some fake data
-    //    m.setcheckBoxBool(QString("AQString"));
-    //    m.settextBoxString1("AString");
-    //    m.settextBoxString4(0);
+////    LGen<std::pair<QString,QString>,QString> load(m);
+////    load.generateClass();
 
-    //    //saver will write out all the fields into the model file
-    //    saver.save(m);
-    //    loader.load(m);
 
-    //    qDebug()<<m.getcheckBoxBool();
-    //    qDebug()<<QString::fromStdString(m.gettextBoxString1());
-    //    qDebug()<<m.gettextBoxString2();
-    //    qDebug()<<QString::fromStdString(to_string(m.gettextBoxString4()));
+//    //GENERATE AND INSERT DATA INTO DATA.xml, which is the xml generated form the input model
+
+//    //instantiate the saver and model
+//    //    Saver saver;
+//    //    Loader loader;
+//    //    Model m;
+
+//    //    //put in some fake data
+//    //    m.setcheckBoxBool(QString("AQString"));
+//    //    m.settextBoxString1("AString");
+//    //    m.settextBoxString4(0);
+
+//    //    //saver will write out all the fields into the model file
+//    //    saver.save(m);
+//    //    loader.load(m);
+
+//    //    qDebug()<<m.getcheckBoxBool();
+//    //    qDebug()<<QString::fromStdString(m.gettextBoxString1());
+//    //    qDebug()<<m.gettextBoxString2();
+//    //    qDebug()<<QString::fromStdString(to_string(m.gettextBoxString4()));
 
 
 //    return 0;
@@ -81,8 +81,8 @@ int main(int argc, char *argv[])
 
     QApplication a(argc, argv);
 
-//    MainWindow w;
-//    w.show();
+    MainWindow w;
+    w.show();
 
     return a.exec();
 }

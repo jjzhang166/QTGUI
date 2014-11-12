@@ -20,7 +20,7 @@ public:
     ~MainWindow();
 
     // getter and setter for the model
-    void setModel();
+    void setModel(Model model);
     Model getModel();
 
 private slots:

@@ -113,6 +113,8 @@ private:
     void genIncludes(ofstream & savestream) {
         savestream<<INCLUDEHEADER<<" <QXmlStreamWriter>"<<endl;
         savestream<<INCLUDEHEADER<<" <QFile>"<<endl<<endl;
+        savestream<<INCLUDEHEADER<<" <QString>"<<endl<<endl;
+        savestream<<INCLUDEHEADER<<" <string>"<<endl<<endl;
 
     }
 
@@ -231,9 +233,9 @@ private:
                 genMethodLine("//Don't care about the value, as long as it is less in memory size than an long, we can save it as a long",tab_index);
 
                 //convert to string
-                genMethodLine("writer.writeAttribute(\"value\",QString::fromStdString(to_string(model.get"+string(it->first.second.toUtf8().constData())+"())));",tab_index--);
+                genMethodLine("writer.writeAttribute(\"value\",QString::fromStdString(std::to_string(model.get"+string(it->first.second.toUtf8().constData())+"())));",tab_index--);
 
-                // genMethodLine("writer.writeAttribute(\"value\",QString::fromStdString(to_string(*(static_cast<long*>(pointer)))));",tab_index--);
+                // genMethodLine("writer.writeAttribute(\"value\",QString::fromStdString(std::to_string(*(static_cast<long*>(pointer)))));",tab_index--);
                 genMethodLine("} else {",tab_index++);
                 //else for error handling
                 genMethodLine("//Generate error if the value is too big to fit",tab_index);

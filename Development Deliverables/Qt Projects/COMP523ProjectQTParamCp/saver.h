@@ -3,6 +3,10 @@
 #include <QXmlStreamWriter>
 #include <QFile>
 
+#include <QString>
+
+#include <string>
+
 class Saver {
 
 public: 
@@ -36,7 +40,7 @@ public:
 		if(sizeof(model.getswagbox())<=sizeof(long)) {
 
 			//Don't care about the value, as long as it is less in memory size than an long, we can save it as a long
-			writer.writeAttribute("value",QString::fromStdString(to_string(model.getswagbox())));
+			writer.writeAttribute("value",QString::fromStdString(std::to_string(model.getswagbox())));
 		} else {
 			//Generate error if the value is too big to fit
 			writer.writeAttribute("value","Error: Invalid attribute value");
@@ -49,7 +53,7 @@ public:
 		if(sizeof(model.getswagboxII())<=sizeof(long)) {
 
 			//Don't care about the value, as long as it is less in memory size than an long, we can save it as a long
-			writer.writeAttribute("value",QString::fromStdString(to_string(model.getswagboxII())));
+			writer.writeAttribute("value",QString::fromStdString(std::to_string(model.getswagboxII())));
 		} else {
 			//Generate error if the value is too big to fit
 			writer.writeAttribute("value","Error: Invalid attribute value");
