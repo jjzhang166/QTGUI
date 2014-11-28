@@ -5,6 +5,7 @@
 #include <map>
 #include "mgen.h"
 #include "model.h"
+#include "sgen.h"
 #include <QXmlStreamWriter>
 #include <QFile>
 #include <QFileDevice>
@@ -25,26 +26,28 @@ using namespace std;
 typedef std::pair<QString,QString> datapair;
 
 
-//int main(int argc, char *argv[])
-//{
+int main(int argc, char *argv[])
+{
 
 
-//    //UNCOMMENT THIS PART TO ADD MORE FIELD AND GENERATE THE MODEL.h
-////    Parser parser;
-////    map<std::pair<QString,QString>,QString> m;
+    //UNCOMMENT THIS PART TO ADD MORE FIELD AND GENERATE THE MODEL.h
+    Parser parser;
+    map<std::pair<QString,QString>,QString> m;
 
-////    parser.parseXML(m);
+    parser.parseXML(m);
 
 
-////    MGen<std::pair<QString,QString>,QString> mgen(m);
-////    mgen.generateClass();
+    MGen<std::pair<QString,QString>,QString> mgen(m);
+    mgen.generateClass();
 
-////    SGen<std::pair<QString,QString>,QString> save(m);
-////    save.generateClass();
 
-////    LGen<std::pair<QString,QString>,QString> load(m);
-////    load.generateClass();
 
+    LGen<std::pair<QString,QString>,QString> load(m);
+    load.generateClass();
+
+    SGen save(m);
+    save.generateClass();
+}
 
 //    //GENERATE AND INSERT DATA INTO DATA.xml, which is the xml generated form the input model
 
@@ -75,17 +78,17 @@ typedef std::pair<QString,QString> datapair;
 
 
 //QApplication main do not remove
-int main(int argc, char *argv[])
-{
-    using namespace std;
+//int main(int argc, char *argv[])
+//{
+//    using namespace std;
 
-    QApplication a(argc, argv);
+//    QApplication a(argc, argv);
 
-    MainWindow w;
-    w.show();
+//    MainWindow w;
+//    w.show();
 
-    return a.exec();
-}
+//    return a.exec();
+//}
 
 
 
