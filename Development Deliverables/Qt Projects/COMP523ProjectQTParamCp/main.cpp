@@ -1,4 +1,4 @@
-#include "mainwindow.h"
+
 #include <QApplication>
 #include <QString>
 #include <QObject>
@@ -15,6 +15,7 @@
 #include "loader.h"
 #include "lgen.h"
 #include "parse.h"
+#include "mainwindow.h"
 
 #include <QTextEdit>
 #include <QLineEdit>
@@ -26,28 +27,28 @@ using namespace std;
 typedef std::pair<QString,QString> datapair;
 
 
-int main(int argc, char *argv[])
-{
+//int main(int argc, char *argv[])
+//{
 
 
-    //UNCOMMENT THIS PART TO ADD MORE FIELD AND GENERATE THE MODEL.h
-    Parser parser;
-    map<std::pair<QString,QString>,QString> m;
+//    //UNCOMMENT THIS PART TO ADD MORE FIELD AND GENERATE THE MODEL.h
+//    Parser parser;
+//    map<std::pair<QString,QString>,QString> m;
 
-    parser.parseXML(m);
-
-
-    MGen<std::pair<QString,QString>,QString> mgen(m);
-    mgen.generateClass();
+//    parser.parseXML(m);
 
 
+//    MGen mgen(m);
+//    mgen.generateClass();
 
-    LGen<std::pair<QString,QString>,QString> load(m);
-    load.generateClass();
 
-    SGen save(m);
-    save.generateClass();
-}
+
+//    //LGen<std::pair<QString,QString>,QString> load(m);
+//    //load.generateClass();
+
+//    //SGen save(m);
+//    //save.generateClass();
+//}
 
 //    //GENERATE AND INSERT DATA INTO DATA.xml, which is the xml generated form the input model
 
@@ -78,17 +79,19 @@ int main(int argc, char *argv[])
 
 
 //QApplication main do not remove
-//int main(int argc, char *argv[])
-//{
-//    using namespace std;
+int main(int argc, char *argv[])
+{
+    using namespace std;
 
-//    QApplication a(argc, argv);
+    QApplication a(argc, argv);
 
-//    MainWindow w;
-//    w.show();
+    MainWindow w;
+    Model model;
+    w.setModel(model);
+    w.show();
 
-//    return a.exec();
-//}
+    return a.exec();
+}
 
 
 

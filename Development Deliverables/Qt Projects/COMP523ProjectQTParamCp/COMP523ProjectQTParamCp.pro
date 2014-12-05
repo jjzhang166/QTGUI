@@ -13,10 +13,12 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp \
-    sgen.cpp
+    sgen.cpp \
+    mgen.cpp \
+    mainwindow.cpp \
+    Model.cpp
 
-HEADERS  += mainwindow.h \
+HEADERS  += \
     ModelGenerator.h \
     mgen.h \
     sgen.h \
@@ -24,6 +26,7 @@ HEADERS  += mainwindow.h \
     saver.h \
     model.h \
     loader.h \
-    parse.h
+    parse.h \
+    mainwindow.h
 
 FORMS    += mainwindow.ui

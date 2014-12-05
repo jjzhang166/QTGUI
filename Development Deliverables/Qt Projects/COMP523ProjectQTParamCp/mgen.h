@@ -28,184 +28,55 @@
 #include <fstream>
 #include <string>
 #include <set>
-
-#include <iostream>
-#include <QDebug>
-#include <QTextEdit>
-
-
+#include <QString>
 
 using namespace std;
 
 
 //Class used to strip data from the dictionary and streams into a cpp file current in
 //the same directory
-template <class K, class V>
 class MGen{
-    const map<K,V> & hmap;
-    //file stream to print out to model file
-    std::ofstream modelstream;
+    const map<std::pair<QString,QString>,QString> & hmap;
+
     //headers that have been used
     std::set<QString> usedHeader;
+
+    //name of the header file to be generated
+    QString & filename;
 
 public:
 
     //constructor
-    MGen(map<K,V> & hmap):hmap(hmap){
-
-
-    }
+    MGen(map<std::pair<QString,QString>,QString> & hmap,QString & filename=QString("model.h"));
 
     //destructor
-    ~MGen(){
-
-
-    }
+    ~MGen();
 
     //METHODS
 
-    //Outputs the hmap into the Model.cpp
-    void generateClass() {
-        modelstream.open(MODELFILENAME,ios::out);
-        try{
-            if(modelstream.is_open()) {
-
-                modelstream<<"#ifndef MODEL_H"<<endl;
-                modelstream<<"#define MODEL_H"<<endl<<endl;
-
-                //generate the includes
-                genIncludes(modelstream);
-
-                //print class keyword and the class name
-                modelstream << CLASSHEADER<<endl;
-
-
-
-                //generate the field
-                genField(modelstream);
-
-
-
-                //make getter and setters public
-                modelstream <<endl<< "public: "<<endl<<endl;
-
-                genGetSet(modelstream);
-
-
-                modelstream<<"};"<<endl<<endl;
-                modelstream<<"#endif"<<endl;
-            }
-        }catch(...) {
-            cout<<"Output to model cpp file failed"<<endl;
-
-        }
-
-        modelstream.close();
-    }
-
+    //called to generate the whole class
+    void generateClass();
 
 private:
-    void genIncludes(ofstream & modelstream) {
-        //get iterator from begin
-        map<K,V>::const_iterator it=hmap.begin();
 
+    //generate the apprpriate includes, used by genHeader
+    void genIncludes(ofstream& headerstream);
 
-        while(it != hmap.end()) {
+    //generate the associated header file
+    void genHeader(ofstream& headerstream);
 
-            qDebug()<<string("QString").compare(it->second.toUtf8().constData());
-
-            //compare the value type to the header QString for now, see if both are same string, aka when compare returns 0
-            if(string("QString").compare(it->second.toUtf8().constData())==0 &&
-
-                    //try to find the header first
-                    (usedHeader.find(it->second.toUtf8().constData()) == usedHeader.end())) {
-
-                modelstream<<"#include <"<<it->second.toUtf8().constData()
-                         <<">"<<endl<<endl;
-
-                //put into set
-                usedHeader.insert(it->second.toUtf8().constData());
-            }
-
-            it++;
-        }
-
-    }
+    //generate the source file
+    void genSource(ofstream& sourcestream);
 
 
     //generates fields
-    void genField(ofstream & modelstream){
-        //get iterator from begin
-        map<K,V>::const_iterator it=hmap.begin();
+    void genField(ofstream & headerstream);
 
+    void genGetSet(ofstream & stream,bool headeronly);
 
-        while(it != hmap.end()) {
+    void genGet(map<std::pair<QString,QString>,QString>::const_iterator & it, ofstream & stream,bool headeronly);
 
-            modelstream<<"\t"<<it->second.toUtf8().constData()<<" "
-                     <<it->first.second.toUtf8().constData()<<";"<<endl;
-
-
-
-            it++;
-        }
-
-
-    }
-
-
-    void genGetSet(ofstream & modelstream) {
-        //get iterator from begin
-        map<K,V>::const_iterator it=hmap.begin();
-
-        //while the point did not hit the end of the map
-        while(it != hmap.end()) {
-
-            //getter
-            genGet(it,modelstream);
-
-
-
-            //setter
-            genSet(it,modelstream);
-
-            it++;
-        }
-
-    }
-
-    void genGet(typename map<K,V>::const_iterator & it, ofstream & modelstream) {
-        //generate Type getVarName();
-        modelstream<<"\t"<<it->second.toUtf8().constData()<<" "
-                 <<"get"
-                <<it->first.second.toUtf8().constData()<<"(){"<<endl;
-
-        //generate body of getter
-        modelstream<<"\t\treturn "<<
-                    it->first.second.toUtf8().constData()<<";"<<endl;
-
-        //end it
-        modelstream<<"\t}"<<endl;
-
-    }
-
-    void genSet(typename map<K,V>::const_iterator & it, ofstream & modelstream) {
-        //generate Type setVarName(Type a);
-        modelstream<<"\tvoid "
-                 <<"set"
-                <<it->first.second.toUtf8().constData()<<"("
-               <<it->second.toUtf8().constData()
-              <<" a"
-             <<"){"<<endl;
-
-        //generate body of setter
-        modelstream<<"\t\t"<<
-                    it->first.second.toUtf8().constData()<<"=a;"
-                 <<endl;
-
-        //end it
-        modelstream<<"\t}"<<endl;
-
-    }
+    void genSet(map<std::pair<QString,QString>,QString>::const_iterator & it, ofstream & stream,bool headeronly);
 
 
 
