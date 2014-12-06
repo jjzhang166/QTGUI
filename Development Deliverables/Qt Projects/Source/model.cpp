@@ -1,5 +1,11 @@
 #include "model.h";
 
+	bool model::getcheckBoxsdf(){
+		return checkBoxsdf;
+	}
+	void model::setcheckBoxsdf(bool a){
+		checkBoxsdf=a;
+	}
 	bool model::getswagbox(){
 		return swagbox;
 	}

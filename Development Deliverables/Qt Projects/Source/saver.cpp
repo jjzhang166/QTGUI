@@ -26,8 +26,19 @@
 		writer.writeNamespace("https://github.com/QTGUIFolks/QTGUI","m");
 		writer.writeEmptyElement("m:Data");
 		writer.writeAttribute("type","bool");
-		writer.writeAttribute("name","swagbox");
+		writer.writeAttribute("name","checkBoxsdf");
 		//Enagaging hacky void pointer method of saving
+		if(sizeof(m.getcheckBoxsdf())<=sizeof(long)) {
+
+			//Don't care about the value, as long as it is less in memory size than an long, we can save it as a long
+			writer.writeAttribute("value",QString::fromStdString(std::to_string(m.getcheckBoxsdf())));
+		} else {
+			//Generate error if the value is too big to fit
+			writer.writeAttribute("value","Error: Invalid attribute value");
+		}
+		writer.writeEmptyElement("m:Data");
+		writer.writeAttribute("type","bool");
+		writer.writeAttribute("name","swagbox");
 		if(sizeof(m.getswagbox())<=sizeof(long)) {
 
 			//Don't care about the value, as long as it is less in memory size than an long, we can save it as a long

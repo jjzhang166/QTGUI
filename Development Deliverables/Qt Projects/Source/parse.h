@@ -10,11 +10,14 @@
 
 
 class Parser{
+    string uifileuri;
+
 public:
+    Parser(string uifileuri):uifileuri(uifileuri){}
 
     map<std::pair<QString,QString>,QString> parseXML(map<std::pair<QString,QString>,QString>& m) {
         /* We'll parse the example.xml */
-        QFile* file = new QFile("../COMP523QTParamCp/mainwindow.ui");
+        QFile* file = new QFile(uifileuri.data());
 
         /* If we can't open it, let's show an error message. */
         if (!file->open(QIODevice::ReadOnly | QIODevice::Text)) {

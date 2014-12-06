@@ -40,6 +40,9 @@ void LGen::generateClass() {
 
         out.nospace() << "\n};\n";
         out.nospace() << "#endif";
+    } else {
+        qDebug()<<"Loader failed to open";
+
     }
 
     loaderh.close();

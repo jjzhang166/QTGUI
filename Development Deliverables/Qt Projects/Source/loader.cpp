@@ -9,7 +9,7 @@
 		QFile* data = new QFile("data.xml");
 		if (!data->open(QIODevice::ReadOnly | QIODevice::Text)) 
 		{
-            qDebug() << "Not read only";
+			qDebug() << "Not read only";
 		}
 
 		QXmlStreamReader readXML(data);
@@ -24,6 +24,18 @@
 			{
 				if(readXML.attributes().length()>2)
 					xmlTokens[std::make_pair(readXML.attributes()[0].value().toString(), readXML.attributes()[1].value().toString())] = readXML.attributes()[2].value().toString();
+			}
+		}
+
+		tmpClassType = "bool";
+		tmpClassName = "checkBoxsdf";
+
+		for (It it= xmlTokens.begin(); it != xmlTokens.end(); ++it) 
+		{
+			if((it -> first.second).compare(tmpClassName) == 0) 
+			{
+					int boolValue = ((QString)(it -> second)).toInt();
+					model.setcheckBoxsdf(static_cast<bool>(boolValue));
 			}
 		}
 

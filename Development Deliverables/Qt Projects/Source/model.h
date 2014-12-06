@@ -4,12 +4,16 @@
 #include <QString>
 
 class model {
+	bool checkBoxsdf;
 	bool swagbox;
 	bool swagboxII;
 	QString textEdit;
 	QString textEdit_2;
 
 public: 
+
+	bool getcheckBoxsdf();
+	void setcheckBoxsdf(bool a);
 
 	bool getswagbox();
 	void setswagbox(bool a);
