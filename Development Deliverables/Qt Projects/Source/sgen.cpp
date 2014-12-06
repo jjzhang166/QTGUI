@@ -27,8 +27,8 @@ void SGen::generateClass() {
 
     try{
         if(savehstream.is_open()) {
-            genMethodLine(savehstream,"#ifndef SAVER_H",0);
-            genMethodLine(savehstream,"#define SAVER_H",0);
+            genMethodLine(savehstream,"#ifndef "+this->filename+"_H",0);
+            genMethodLine(savehstream,"#define "+this->filename+"_H",0);
 
             //generate the includes
             genIncludes(savehstream);

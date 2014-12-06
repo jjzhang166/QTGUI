@@ -1,22 +1,22 @@
-#ifndef loader_H
-#define loader_H
+#ifndef TestLoader_H
+#define TestLoader_H
 
 #include <QCoreApplication>
 #include <QString>
 #include <QDebug>
 #include <map>
 #include <QFile>
-#include "model.h"
+#include "TestModel.h"
 #include <QXmlStreamReader>
 
 
-class loader{
+class TestLoader{
 
 	QString tmpClassName;
 	QString tmpClassType;
 public:
 
-	model load(model& model);
+	TestModel load(TestModel& model);
 
 };
 #endif

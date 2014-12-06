@@ -50,8 +50,8 @@ void MGen::generateClass() {
 }
 
 void MGen::genHeader(ofstream & headerstream) {
-    headerstream<<"#ifndef MODEL_H"<<endl;
-    headerstream<<"#define MODEL_H"<<endl<<endl;
+    headerstream<<"#ifndef "+this->filename+"_H"<<endl;
+    headerstream<<"#define "+this->filename+"_H"<<endl<<endl;
 
     //generate the includes
     genIncludes(headerstream);
@@ -73,7 +73,7 @@ void MGen::genHeader(ofstream & headerstream) {
 }
 
 void MGen::genSource(ofstream & sourcestream){
-    sourcestream<<"#include \"model.h\";"<<endl<<endl;
+    sourcestream<<"#include \""+this->filename+".h\";"<<endl<<endl;
 
     genGetSet(sourcestream,false);
 

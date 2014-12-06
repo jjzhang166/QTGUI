@@ -14,13 +14,13 @@ void LGen::generateClass() {
     if (loaderh.open(QFile::WriteOnly | QFile::Truncate)) {
         QDebug out(&loaderh);
 
-        out.nospace() << "#ifndef LOADER_H\n";
-        out.nospace() << "#define LOADER_H\n\n";
+        out.nospace() << string("#ifndef "+this->filename+"_H\n").data();
+        out.nospace() << string("#define "+this->filename+"_H\n\n").data();
 
         out.nospace() << "#include <QCoreApplication>\n#include <QString>\n";
         out.nospace() << "#include <QDebug>\n#include <map>\n";
         out.nospace() << "#include <QFile>\n";
-        out.nospace() << "#include \"model.h\"\n";
+        out.nospace() << string("#include \""+this->modelclass+".h\"\n").data();
         out.nospace() << "#include <QXmlStreamReader>\n";
 
         out.nospace() << "\n\n";

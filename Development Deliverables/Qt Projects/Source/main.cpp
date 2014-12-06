@@ -27,74 +27,76 @@ using namespace std;
 typedef std::pair<QString,QString> datapair;
 
 
-//int main(int argc, char *argv[])
-//{
+void runFirstWorkFlow(int argc, char* argv[]) {
+    //default info
+    string savername;
+    string modelname;
+    string loadername;
+    string directory;
+    string uifileuri;
 
-//    //default info
-//    string savername("saver");
-//    string modelname("model");
-//    string loadername("loader");
-//    string directory("../COMP523QTParamCp/");
-//    string uifileuri("../COMP523QTParamCp/mainwindow.ui");
+    //arguments info
+    //-d directory
+    //-m modelname
+    //-l loadername
+    //-s savername
+    //-u uifileuri
+    int i=0;
+    for(;i<argc;i++) {
+        if(i+1>=argc) {
+           break;
 
-//    //arguments info
-//    //-d directory
-//    //-m modelname
-//    //-l loadername
-//    //-s savername
-//    //-u uifileuri
-//    int i=0;
-////    for(;i<argc;i++) {
-////        if(i+1>=argc) {
-////           break;
+        }
 
-////        }
-////        if(!std::strcmp(argv[i],"-d")) {
-////            directory=string(argv[++i],sizeof(argv[++i]));
+        if(!std::strcmp(argv[i],"-d")) {
+            i++;
+            directory=string(argv[i],strlen(argv[i]));
 
-////        }else if(!std::strcmp(argv[i],"-m")) {
-////            modelname=string(argv[++i],sizeof(argv[++i]));
+        }else if(!std::strcmp(argv[i],"-m")) {
+            i++;
+            modelname=string(argv[i],strlen(argv[i]));
 
-////        }else if(!std::strcmp(argv[i],"-l")) {
-////            loadername=string(argv[++i],sizeof(argv[++i]));
+        }else if(!std::strcmp(argv[i],"-l")) {
+            i++;
+            loadername=string(argv[i],strlen(argv[i]));
 
-////        }else if(!std::strcmp(argv[i],"-s")) {
-////            savername=string(argv[++i],sizeof(argv[++i]));
+        }else if(!std::strcmp(argv[i],"-s")) {
+            i++;
+            savername=string(argv[i],strlen(argv[i]));
 
-////        }else if(!std::strcmp(argv[i],"-u")) {
-////            uifileuri=string(argv[++i],sizeof(argv[++i]));
+        }else if(!std::strcmp(argv[i],"-u")) {
+            i++;
+            uifileuri=string(argv[i],strlen(argv[i]));
 
-////        }
+        }
 
-////    }
+    }
 
-////    qDebug()<<QString::fromStdString(loadername);
+    //UNCOMMENT THIS PART TO ADD MORE FIELD AND GENERATE THE MODEL.h
+    Parser parser(uifileuri);
+    map<std::pair<QString,QString>,QString> m;
 
+    parser.parseXML(m);
 
-//    //UNCOMMENT THIS PART TO ADD MORE FIELD AND GENERATE THE MODEL.h
-//    Parser parser(uifileuri);
-//    map<std::pair<QString,QString>,QString> m;
+    qDebug()<<"yes";
 
-//    parser.parseXML(m);
+    MGen mgen(m,directory,modelname);
+    mgen.generateClass();
 
-//    qDebug()<<"yes";
+    LGen load(m,modelname,directory,loadername);
+    load.generateClass();
 
-//    MGen mgen(m,string("../COMP523QTParamCp/"));
-//    mgen.generateClass();
-
-//    LGen load(m,modelname,directory,loadername);
-//    load.generateClass();
-
-//    SGen save(m,modelname,directory,savername);
-//    save.generateClass();
-//}
-
-
+    SGen save(m,modelname,directory,savername);
+    save.generateClass();
 
 
 
-//QApplication main do not remove
-int main(int argc, char *argv[])
+}
+
+
+
+////QApplication main do not remove
+int runSecondWorkFlow(int argc, char* argv[])
 {
     using namespace std;
 
@@ -106,6 +108,14 @@ int main(int argc, char *argv[])
     w.show();
 
     return a.exec();
+}
+
+int main(int argc, char *argv[])
+{
+    //runFirstWorkFlow(argc,argv);
+
+    return runSecondWorkFlow(argc,argv) || 0;
+
 }
 
 

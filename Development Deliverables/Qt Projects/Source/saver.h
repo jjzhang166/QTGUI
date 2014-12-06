@@ -1,5 +1,5 @@
-#ifndef SAVER_H
-#define SAVER_H
+#ifndef saver_H
+#define saver_H
 #include <QXmlStreamWriter>
 #include <QFile>
 

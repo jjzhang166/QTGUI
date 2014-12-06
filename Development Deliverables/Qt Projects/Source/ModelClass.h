@@ -1,9 +1,9 @@
-#ifndef model_H
-#define model_H
+#ifndef ModelClass_H
+#define ModelClass_H
 
 #include <QString>
 
-class model {
+class ModelClass {
 	bool checkBoxsdf;
 	bool swagbox;
 	bool swagboxII;
