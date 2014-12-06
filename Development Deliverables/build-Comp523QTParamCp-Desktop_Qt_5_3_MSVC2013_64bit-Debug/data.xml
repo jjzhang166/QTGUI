@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<m:ModelData xmlns:m="https://github.com/QTGUIFolks/QTGUI">
+    <m:Data type="bool" name="checkBoxsdf" value="0"/>
+    <m:Data type="bool" name="swagbox" value="0"/>
+    <m:Data type="bool" name="swagboxII" value="0"/>
+    <m:Data type="QString" name="comboBox" value="yeaaa boiii"/>
+    <m:Data type="double" name="doubleSpinBox" value="0"/>
+    <m:Data type="QString" name="lineEdit" value=""/>
+    <m:Data type="bool" name="radioButton" value="0"/>
+    <m:Data type="bool" name="radioButton_2" value="0"/>
+    <m:Data type="bool" name="radioButton_3" value="0"/>
+    <m:Data type="int" name="horizontalScrollBar" value="0"/>
+    <m:Data type="int" name="verticalScrollBar" value="8"/>
+    <m:Data type="int" name="spinBox" value="0"/>
+    <m:Data type="QString" name="textEdit" value="sdfas"/>
+    <m:Data type="QString" name="textEdit_2" value=""/>
+</m:ModelData>
