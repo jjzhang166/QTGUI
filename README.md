@@ -1,4 +1,4 @@
-QTGUI (COMP 523 Software Engineering Lab Fall 2014)
+Qt GUI Parameterization (COMP 523 Software Engineering Lab Fall 2014)
 =====
 
 Website Link: https://sites.google.com/site/qtguiproject2014/home
