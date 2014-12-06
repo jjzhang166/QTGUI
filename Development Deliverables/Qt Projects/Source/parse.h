@@ -42,16 +42,40 @@ public:
 
             else if (xml.qualifiedName() == "widget" && xml.isEndElement() != true)
             {
-                if (xml.attributes().at(0).value().toString().compare("QTextEdit") == 0)
+                if (xml.attributes().at(0).value().toString().compare("QTextEdit") == 0
+                    || xml.attributes().at(0).value().toString().compare("QComboBox") == 0
+                    || xml.attributes().at(0).value().toString().compare("QLineEdit") == 0)
                 {
                     m[std::make_pair(xml.attributes().at(0).value().toString(), xml.attributes().at(1).value().toString())] = "QString";
-                    qDebug() << xml.attributes().at(0).value();     // Class type
-                    qDebug() << xml.attributes().at(1).value();     // Class name
+//                    qDebug() << xml.attributes().at(0).value();     // Class type
+//                    qDebug() << xml.attributes().at(1).value();     // Class name
                 }
 
-                else if (xml.attributes().at(0).value().toString().compare("QCheckBox") == 0)
+                else if (xml.attributes().at(0).value().toString().compare("QCheckBox") == 0
+                         || xml.attributes().at(0).value().toString().compare("QRadioButton") == 0)
                 {
                     m[std::make_pair(xml.attributes().at(0).value().toString(), xml.attributes().at(1).value().toString())] = "bool";
+//                    qDebug() << xml.attributes().at(0).value();     // Class type
+//                    qDebug() << xml.attributes().at(1).value();     // Class name
+                }
+
+                else if (xml.attributes().at(0).value().toString().compare("QDoubleSpinBox") == 0)
+                {
+                    m[std::make_pair(xml.attributes().at(0).value().toString(), xml.attributes().at(1).value().toString())] = "double";
+//                    qDebug() << xml.attributes().at(0).value();     // Class type
+//                    qDebug() << xml.attributes().at(1).value();     // Class name
+                }
+
+                else if (xml.attributes().at(0).value().toString().compare("QSpinBox") == 0
+                         || xml.attributes().at(0).value().toString().compare("QScrollBar") == 0)
+                {
+                    m[std::make_pair(xml.attributes().at(0).value().toString(), xml.attributes().at(1).value().toString())] = "int";
+//                    qDebug() << xml.attributes().at(0).value();     // Class type
+//                    qDebug() << xml.attributes().at(1).value();     // Class name
+                }
+
+                else if (xml.attributes().at(0).value().toString().compare("QListWidget") == 0)
+                {
                     qDebug() << xml.attributes().at(0).value();     // Class type
                     qDebug() << xml.attributes().at(1).value();     // Class name
                 }

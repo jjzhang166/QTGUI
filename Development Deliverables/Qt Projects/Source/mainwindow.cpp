@@ -48,6 +48,26 @@ void MainWindow::on_pushButton_clicked()
     QString txt2 = ui->textEdit_2->toPlainText();
     m.settextEdit_2(txt2);
 
+    m.setcheckBoxsdf(ui->checkBoxsdf->isChecked());
+
+    m.setcomboBox(ui->comboBox->currentText());
+
+    m.setdoubleSpinBox(ui->doubleSpinBox->value());
+
+    m.sethorizontalScrollBar(ui->horizontalScrollBar->value());
+
+    m.setverticalScrollBar(ui->verticalScrollBar->value());
+
+    m.setlineEdit(ui->lineEdit->text());
+
+    m.setradioButton(ui->radioButton->isChecked());
+
+    m.setradioButton_2(ui->radioButton_2->isChecked());
+
+    m.setradioButton_3(ui->radioButton_3->isChecked());
+
+    m.setspinBox(ui->spinBox->value());
+
     saver save;
     save.save(m);
 
@@ -59,6 +79,28 @@ void MainWindow::on_pushButton_2_clicked()
 {
     loader loader;
     loader.load(m);
+
+
+    ui->checkBoxsdf->setChecked(m.getcheckBoxsdf());
+
+    ui->comboBox->setCurrentText(m.getcomboBox());
+
+    ui->doubleSpinBox->setValue(m.getdoubleSpinBox());
+
+    ui->horizontalScrollBar->setValue(m.gethorizontalScrollBar());
+
+    ui->verticalScrollBar->setValue(m.getverticalScrollBar());
+
+    ui->lineEdit->setText(m.getlineEdit());
+
+    ui->radioButton->setChecked( m.getradioButton());
+
+    ui->radioButton_2->setChecked(m.getradioButton_2());
+
+    ui->radioButton_3->setChecked( m.getradioButton_3());
+
+    ui->spinBox->setValue(m.getspinBox());
+
 
 
     bool sb1 = m.getswagbox();

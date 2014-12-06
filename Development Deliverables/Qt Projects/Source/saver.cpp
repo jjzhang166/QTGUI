@@ -27,37 +27,51 @@
 		writer.writeEmptyElement("m:Data");
 		writer.writeAttribute("type","bool");
 		writer.writeAttribute("name","checkBoxsdf");
-		//Enagaging hacky void pointer method of saving
-		if(sizeof(m.getcheckBoxsdf())<=sizeof(long)) {
-
-			//Don't care about the value, as long as it is less in memory size than an long, we can save it as a long
-			writer.writeAttribute("value",QString::fromStdString(std::to_string(m.getcheckBoxsdf())));
-		} else {
-			//Generate error if the value is too big to fit
-			writer.writeAttribute("value","Error: Invalid attribute value");
-		}
+		writer.writeAttribute("value",QString::number(m.getcheckBoxsdf()));
 		writer.writeEmptyElement("m:Data");
 		writer.writeAttribute("type","bool");
 		writer.writeAttribute("name","swagbox");
-		if(sizeof(m.getswagbox())<=sizeof(long)) {
-
-			//Don't care about the value, as long as it is less in memory size than an long, we can save it as a long
-			writer.writeAttribute("value",QString::fromStdString(std::to_string(m.getswagbox())));
-		} else {
-			//Generate error if the value is too big to fit
-			writer.writeAttribute("value","Error: Invalid attribute value");
-		}
+		writer.writeAttribute("value",QString::number(m.getswagbox()));
 		writer.writeEmptyElement("m:Data");
 		writer.writeAttribute("type","bool");
 		writer.writeAttribute("name","swagboxII");
-		if(sizeof(m.getswagboxII())<=sizeof(long)) {
-
-			//Don't care about the value, as long as it is less in memory size than an long, we can save it as a long
-			writer.writeAttribute("value",QString::fromStdString(std::to_string(m.getswagboxII())));
-		} else {
-			//Generate error if the value is too big to fit
-			writer.writeAttribute("value","Error: Invalid attribute value");
-		}
+		writer.writeAttribute("value",QString::number(m.getswagboxII()));
+		writer.writeEmptyElement("m:Data");
+		writer.writeAttribute("type","QString");
+		writer.writeAttribute("name","comboBox");
+		writer.writeAttribute("value",m.getcomboBox());
+		writer.writeEmptyElement("m:Data");
+		writer.writeAttribute("type","double");
+		writer.writeAttribute("name","doubleSpinBox");
+		writer.writeAttribute("value",QString::number(m.getdoubleSpinBox()));
+		writer.writeEmptyElement("m:Data");
+		writer.writeAttribute("type","QString");
+		writer.writeAttribute("name","lineEdit");
+		writer.writeAttribute("value",m.getlineEdit());
+		writer.writeEmptyElement("m:Data");
+		writer.writeAttribute("type","bool");
+		writer.writeAttribute("name","radioButton");
+		writer.writeAttribute("value",QString::number(m.getradioButton()));
+		writer.writeEmptyElement("m:Data");
+		writer.writeAttribute("type","bool");
+		writer.writeAttribute("name","radioButton_2");
+		writer.writeAttribute("value",QString::number(m.getradioButton_2()));
+		writer.writeEmptyElement("m:Data");
+		writer.writeAttribute("type","bool");
+		writer.writeAttribute("name","radioButton_3");
+		writer.writeAttribute("value",QString::number(m.getradioButton_3()));
+		writer.writeEmptyElement("m:Data");
+		writer.writeAttribute("type","int");
+		writer.writeAttribute("name","horizontalScrollBar");
+		writer.writeAttribute("value",QString::number(m.gethorizontalScrollBar()));
+		writer.writeEmptyElement("m:Data");
+		writer.writeAttribute("type","int");
+		writer.writeAttribute("name","verticalScrollBar");
+		writer.writeAttribute("value",QString::number(m.getverticalScrollBar()));
+		writer.writeEmptyElement("m:Data");
+		writer.writeAttribute("type","int");
+		writer.writeAttribute("name","spinBox");
+		writer.writeAttribute("value",QString::number(m.getspinBox()));
 		writer.writeEmptyElement("m:Data");
 		writer.writeAttribute("type","QString");
 		writer.writeAttribute("name","textEdit");

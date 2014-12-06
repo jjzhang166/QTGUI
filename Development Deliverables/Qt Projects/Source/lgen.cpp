@@ -104,6 +104,20 @@ void LGen::generateClass() {
                 out.nospace() << "(static_cast<bool>(boolValue));\n";
             }
 
+            else if (((QString)(it -> second)).compare("double") == 0)
+            {
+                out.nospace() << "\t\t\t\t\tdouble doubleValue = ((QString)(it -> second)).toDouble();\n";
+                out.nospace() << "\t\t\t\t\tmodel.set" << (it -> first.second).toUtf8().constData();
+                out.nospace() << "(doubleValue);\n";
+            }
+
+            else if (((QString)(it -> second)).compare("int") == 0)
+            {
+                out.nospace() << "\t\t\t\t\tint intValue = ((QString)(it -> second)).toInt();\n";
+                out.nospace() << "\t\t\t\t\tmodel.set" << (it -> first.second).toUtf8().constData();
+                out.nospace() << "(intValue);\n";
+            }
+
             out.nospace() << "\t\t\t}\n\t\t}";
             out.nospace() << "\n\n";
         }

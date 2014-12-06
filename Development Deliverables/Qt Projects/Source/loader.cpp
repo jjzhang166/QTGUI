@@ -64,6 +64,112 @@
 		}
 
 		tmpClassType = "QString";
+		tmpClassName = "comboBox";
+
+		for (It it= xmlTokens.begin(); it != xmlTokens.end(); ++it) 
+		{
+			if((it -> first.second).compare(tmpClassName) == 0) 
+			{
+					model.setcomboBox((QString)(it -> second));
+			}
+		}
+
+		tmpClassType = "double";
+		tmpClassName = "doubleSpinBox";
+
+		for (It it= xmlTokens.begin(); it != xmlTokens.end(); ++it) 
+		{
+			if((it -> first.second).compare(tmpClassName) == 0) 
+			{
+					double doubleValue = ((QString)(it -> second)).toDouble();
+					model.setdoubleSpinBox(doubleValue);
+			}
+		}
+
+		tmpClassType = "QString";
+		tmpClassName = "lineEdit";
+
+		for (It it= xmlTokens.begin(); it != xmlTokens.end(); ++it) 
+		{
+			if((it -> first.second).compare(tmpClassName) == 0) 
+			{
+					model.setlineEdit((QString)(it -> second));
+			}
+		}
+
+		tmpClassType = "bool";
+		tmpClassName = "radioButton";
+
+		for (It it= xmlTokens.begin(); it != xmlTokens.end(); ++it) 
+		{
+			if((it -> first.second).compare(tmpClassName) == 0) 
+			{
+					int boolValue = ((QString)(it -> second)).toInt();
+					model.setradioButton(static_cast<bool>(boolValue));
+			}
+		}
+
+		tmpClassType = "bool";
+		tmpClassName = "radioButton_2";
+
+		for (It it= xmlTokens.begin(); it != xmlTokens.end(); ++it) 
+		{
+			if((it -> first.second).compare(tmpClassName) == 0) 
+			{
+					int boolValue = ((QString)(it -> second)).toInt();
+					model.setradioButton_2(static_cast<bool>(boolValue));
+			}
+		}
+
+		tmpClassType = "bool";
+		tmpClassName = "radioButton_3";
+
+		for (It it= xmlTokens.begin(); it != xmlTokens.end(); ++it) 
+		{
+			if((it -> first.second).compare(tmpClassName) == 0) 
+			{
+					int boolValue = ((QString)(it -> second)).toInt();
+					model.setradioButton_3(static_cast<bool>(boolValue));
+			}
+		}
+
+		tmpClassType = "int";
+		tmpClassName = "horizontalScrollBar";
+
+		for (It it= xmlTokens.begin(); it != xmlTokens.end(); ++it) 
+		{
+			if((it -> first.second).compare(tmpClassName) == 0) 
+			{
+					int intValue = ((QString)(it -> second)).toInt();
+					model.sethorizontalScrollBar(intValue);
+			}
+		}
+
+		tmpClassType = "int";
+		tmpClassName = "verticalScrollBar";
+
+		for (It it= xmlTokens.begin(); it != xmlTokens.end(); ++it) 
+		{
+			if((it -> first.second).compare(tmpClassName) == 0) 
+			{
+					int intValue = ((QString)(it -> second)).toInt();
+					model.setverticalScrollBar(intValue);
+			}
+		}
+
+		tmpClassType = "int";
+		tmpClassName = "spinBox";
+
+		for (It it= xmlTokens.begin(); it != xmlTokens.end(); ++it) 
+		{
+			if((it -> first.second).compare(tmpClassName) == 0) 
+			{
+					int intValue = ((QString)(it -> second)).toInt();
+					model.setspinBox(intValue);
+			}
+		}
+
+		tmpClassType = "QString";
 		tmpClassName = "textEdit";
 
 		for (It it= xmlTokens.begin(); it != xmlTokens.end(); ++it) 

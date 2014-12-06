@@ -213,6 +213,11 @@ void SGen::genSavetoXMLMethod(ofstream & savestream,map<std::pair<QString,QStrin
             genMethodLine(savestream,"writer.writeAttribute(\"value\",m.get"+string(it->first.second.toUtf8().constData())+"());",tab_index);
 
 
+        } else if(!(it->second.compare(QString("int")) && it->second.compare(QString("double"))
+                  && it->second.compare(QString("bool")))) {
+            //can just output the qstring
+            genMethodLine(savestream,"writer.writeAttribute(\"value\",QString::number(m.get"+string(it->first.second.toUtf8().constData())+"()));",tab_index);
+
         } else {
             //extremely bad way to do this
 
