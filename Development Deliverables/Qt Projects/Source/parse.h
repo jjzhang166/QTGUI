@@ -14,7 +14,7 @@ public:
 
     map<std::pair<QString,QString>,QString> parseXML(map<std::pair<QString,QString>,QString>& m) {
         /* We'll parse the example.xml */
-        QFile* file = new QFile("../COMP523ProjectQTParamCp/mainwindow.ui");
+        QFile* file = new QFile("../COMP523QTParamCp/mainwindow.ui");
 
         /* If we can't open it, let's show an error message. */
         if (!file->open(QIODevice::ReadOnly | QIODevice::Text)) {

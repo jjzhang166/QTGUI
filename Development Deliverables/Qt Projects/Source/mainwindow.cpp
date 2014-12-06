@@ -57,8 +57,8 @@ void MainWindow::on_pushButton_clicked()
 // - Updates the GUI with data from the model
 void MainWindow::on_pushButton_2_clicked()
 {
-    //loader loader;
-    //loader.load(m);
+    loader loader;
+    loader.load(m);
 
 
     bool sb1 = m.getswagbox();
