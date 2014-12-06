@@ -1,1 +1,3 @@
-Just an Empty placeholder file
+Documentation
+=============
+Planning and explanation of the project
