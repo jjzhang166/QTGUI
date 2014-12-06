@@ -1,4 +1,0 @@
-This project is focused on implementing a tool that will create C++ code 
-based on the analysis of QT GUI files. The generated code can then be
-integrated with projects developed in the lab, avoiding common bugs, such
-as losing any unsaved parameters.
