@@ -4,15 +4,20 @@
 #include <map>
 #include <QFile>
 #include <QDebug>
+#include <QString>
 
 template<class K, class V>
 class LGen{
     map<K,V> & m;
 
+    string filename;
+    string modelclass;
+    string directory;
 
 public:
     //constructor
-    LGen(map<K,V> & hmap):m(hmap) {
+    LGen(map<K,V> & hmap, string modelclass, string directory="",string filename="loader")
+        :m(hmap),modelclass(modelclass),directory(directory),filename(filename) {
 
 
     }
@@ -22,19 +27,24 @@ public:
 
 
 
-        QFile loader("../COMP523ProjectQTParamCp/loader.h");
+        QFile loader(QString::fromStdString(directory+filename+".h"));
         if (loader.open(QFile::WriteOnly | QFile::Truncate)) {
             QDebug out(&loader);
+
 
             out.nospace() << "#include <QCoreApplication>\n#include <QString>\n";
             out.nospace() << "#include <QDebug>\n#include <map>\n#include <QFile>\n\n";
 
-            out.nospace() << "class Loader\n{\n\n";
-            out.nospace() << "public:\n\n";
+            out.nospace() << "class ";
+            out.nospace() << filename.data();
+            out.nospace() << "{";
+            out.nospace() << "\n\n";
+            out.nospace() << string("public:\n").data();
+
             out.nospace() << "\tQString tmpClassName;\n";
             out.nospace() << "\tQString tmpClassType;\n";
 
-            out.nospace() << "\n\tModel load(Model& model)\n\t{\n";
+            out.nospace() << string("\n\t"+modelclass+" load("+modelclass+"& model)\n\t{\n").data();
 
             out.nospace() << "\t\tstd::map<std::pair<QString, QString>, QString> xmlTokens;\n";
             out.nospace() << "\t\ttypedef std::map<std::pair<QString, QString>, QString> Dict;\n";
@@ -53,8 +63,9 @@ public:
             out.nospace() << "\t\t\t\tcontinue;\n";
             out.nospace() << "\t\t\t}\n";
             out.nospace() << "\t\t\telse if (readXML.isEndElement() != true) \n\t\t\t{\n";
+            out.nospace() << "\t\t\t\tif(readXML.attributes().length()>2)";
 
-            out.nospace() << "\t\t\t\txmlTokens[std::make_pair(readXML.attributes()[0].value().toString(), readXML.attributes()[1].value().toString())] = readXML.attributes()[2].value().toString();\n";
+            out.nospace() << "\t\t\t\t\txmlTokens[std::make_pair(readXML.attributes()[0].value().toString(), readXML.attributes()[1].value().toString())] = readXML.attributes()[2].value().toString();\n";
             out.nospace() << "\t\t\t}\n";
             out.nospace() << "\t\t}\n\n";
 

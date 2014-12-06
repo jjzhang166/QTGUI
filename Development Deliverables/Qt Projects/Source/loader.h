@@ -3,17 +3,14 @@
 #include <QDebug>
 #include <map>
 #include <QFile>
-#include <QXmlStreamReader>
 
-class loader
-{
+class loader{
 
 public:
-
 	QString tmpClassName;
 	QString tmpClassType;
 
-    model load(model& m)
+	model load(model& model)
 	{
 		std::map<std::pair<QString, QString>, QString> xmlTokens;
 		typedef std::map<std::pair<QString, QString>, QString> Dict;
@@ -35,9 +32,7 @@ public:
 			}
 			else if (readXML.isEndElement() != true) 
 			{
-
-                if(readXML.attributes().length()>2)
-                    xmlTokens[std::make_pair(readXML.attributes()[0].value().toString(), readXML.attributes()[1].value().toString())] = readXML.attributes()[2].value().toString();
+				if(readXML.attributes().length()>2)					xmlTokens[std::make_pair(readXML.attributes()[0].value().toString(), readXML.attributes()[1].value().toString())] = readXML.attributes()[2].value().toString();
 			}
 		}
 
@@ -49,7 +44,7 @@ public:
 			if((it -> first.second).compare(tmpClassName) == 0) 
 			{
 					int boolValue = ((QString)(it -> second)).toInt();
-                    m.setswagbox(static_cast<bool>(boolValue));
+					model.setswagbox(static_cast<bool>(boolValue));
 			}
 		}
 
@@ -61,7 +56,7 @@ public:
 			if((it -> first.second).compare(tmpClassName) == 0) 
 			{
 					int boolValue = ((QString)(it -> second)).toInt();
-                    m.setswagboxII(static_cast<bool>(boolValue));
+					model.setswagboxII(static_cast<bool>(boolValue));
 			}
 		}
 
@@ -72,7 +67,7 @@ public:
 		{
 			if((it -> first.second).compare(tmpClassName) == 0) 
 			{
-                    m.settextEdit((QString)(it -> second));
+					model.settextEdit((QString)(it -> second));
 			}
 		}
 
@@ -83,10 +78,10 @@ public:
 		{
 			if((it -> first.second).compare(tmpClassName) == 0) 
 			{
-                    m.settextEdit_2((QString)(it -> second));
+					model.settextEdit_2((QString)(it -> second));
 			}
 		}
 
-        return m;
+		return model;
 	}
 };

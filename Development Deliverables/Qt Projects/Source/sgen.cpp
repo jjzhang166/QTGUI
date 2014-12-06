@@ -89,7 +89,8 @@ void SGen::genIncludes(ofstream & savehstream) {
     savehstream<<INCLUDEHEADER<<" <QFile>"<<endl<<endl;
     savehstream<<INCLUDEHEADER<<" <QString>"<<endl<<endl;
     savehstream<<INCLUDEHEADER<<" <string>"<<endl<<endl;
-    savehstream<<INCLUDEHEADER<<" \""+this->modelclass+".h\";"<<endl<<endl;
+    savehstream<<INCLUDEHEADER<<" \""+this->modelclass+".h\""<<endl<<endl;
+    savehstream<<INCLUDEHEADER<<" <QDebug>"<<endl<<endl;
 
 }
 

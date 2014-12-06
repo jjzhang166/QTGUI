@@ -9,14 +9,13 @@
 
 #include "model.h"
 
+#include <QDebug>
+
 class saver{ 
 
 public: 
 
-    void save(model& m);
-    void saveToXML(model& m ,QXmlStreamWriter& writer);
-
-
-
+	void save(model& m);
+	void saveToXML(model& m,QXmlStreamWriter& writer);
 };
 #endif
